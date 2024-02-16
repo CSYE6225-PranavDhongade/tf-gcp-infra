@@ -1,5 +1,5 @@
 provider "google" {
-  credentials = file("../gcpkey/project4-414017-5c44874f2950.json")
+  credentials = file("./project4-414017-5c44874f2950.json")
   project     = "project4-414017"
   region      = "us-east1"
 }
