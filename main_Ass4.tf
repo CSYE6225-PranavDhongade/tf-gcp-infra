@@ -43,7 +43,7 @@ resource "google_compute_instance" "example_instance" {
   name         = "instance-20240328-182154"
   machine_type = "e2-medium"
   zone         = "us-east4-b"
-  
+
   boot_disk {
     initialize_params {
       image = "projects/project4-414017/global/images/centos-stream8-1710985162"
@@ -51,10 +51,10 @@ resource "google_compute_instance" "example_instance" {
   }
 
   network_interface {
-    network = google_compute_network.vpc.self_link
+    network    = google_compute_network.vpc.self_link
     subnetwork = google_compute_subnetwork.webapp_subnet1.self_link
-      access_config {
-    // No need to specify anything here for ephemeral IP assignment
+    access_config {
+      // No need to specify anything here for ephemeral IP assignment
     }
   }
 
