@@ -1,3 +1,4 @@
+/*
 provider "google" {
   credentials = file("./project4-414017-5c44874f2950.json")
   project     = "project4-414017"
@@ -36,3 +37,5 @@ resource "google_compute_route" "webapp_route" {
   priority         = 1000
   tags             = ["webapp"]
 }
+
+*/
