@@ -1,6 +1,7 @@
+
 /*
 provider "google" {
-  credentials = file("../gcpkey/project4-414017-5c44874f2950.json")
+  credentials = file("../../gcpkey/project4-414017-5c44874f2950.json")
   project     = "project4-414017"
   region      = "us-east4"
 }
@@ -45,9 +46,40 @@ resource "google_compute_instance" "example_instance" {
   machine_type = "e2-medium"
   zone         = "us-east4-b"
 
+metadata_startup_script = <<-EOF
+#!/bin/bash
+
+# Create an empty .env file in the root directory
+
+touch  /opt/csye6225/webapp/config/.env
+
+# Add content to the .env file
+cat <<EOL > /opt/csye6225/webapp/config/.env
+DB_HOST='localhost'
+DB_USER='postgres'
+DB_PASS='root'
+DB_NAME='cloudassignmentdatabase'
+DB_PORT=5432
+EOL
+
+sudo su
+
+cd /opt/csye6225/webapp
+
+sudo npm install dotenv
+
+cd
+
+sudo chown -R csye6225:csye6225 /opt/csye6225/webapp
+sudo chmod -R 750 /opt/csye6225/webapp
+
+sudo systemctl restart bootup
+
+EOF
+  
   boot_disk {
     initialize_params {
-      image = "projects/project4-414017/global/images/centos-stream8-1710985162"
+      image = "projects/project4-414017/global/images/centos-stream8-1716322291"
     }
   }
 
